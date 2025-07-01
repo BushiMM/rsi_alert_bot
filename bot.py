@@ -2,11 +2,17 @@ from flask import Flask, request
 import telegram
 import os
 
-TOKEN = os.getenv("TELEGRAM_TOKEN")  # Il token lo inserirai come variabile ambiente su Render
+# Variabili ambiente
+TOKEN = os.getenv("TELEGRAM_TOKEN")  # Inserito su Render
+URL = os.getenv("RENDER_EXTERNAL_URL")  # Inserito su Render
+
+# Inizializza il bot
 bot = telegram.Bot(token=TOKEN)
 
+# Crea app Flask
 app = Flask(__name__)
 
+# Endpoint per ricevere gli aggiornamenti da Telegram
 @app.route(f"/{TOKEN}", methods=["POST"])
 def webhook():
     update = telegram.Update.de_json(request.get_json(force=True), bot)
@@ -20,9 +26,17 @@ def webhook():
 
     return "OK", 200
 
+# Endpoint di test
 @app.route("/", methods=["GET"])
 def index():
     return "Bot attivo!", 200
 
+# Imposta il webhook all'avvio dell'app
 if __name__ == "__main__":
-    app.run(debug=True)
+    if URL:
+        webhook_url = f"{URL}/{TOKEN}"
+        bot.set_webhook(url=webhook_url)
+    else:
+        print("⚠️ Manca la variabile RENDER_EXTERNAL_URL")
+    
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
