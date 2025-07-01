@@ -1,7 +1,13 @@
 services:
   - type: web
-    name: tradingview-webhook-bot
-    env: python
-    buildCommand: pip install -r requirements.txt
+    name: rsi-bot
+    runtime: python
+    buildCommand: ""
     startCommand: python bot.py
-    pythonVersion: 3.10
+    envVars:
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: TELEGRAM_ID
+        sync: false
+      - key: RENDER_EXTERNAL_URL
+        sync: false
