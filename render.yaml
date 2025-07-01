@@ -3,7 +3,7 @@ services:
     name: rsi-bot
     runtime: python
     buildCommand: ""
-    startCommand: python bot.py
+    startCommand: python3 bot.py
     envVars:
       - key: TELEGRAM_TOKEN
         sync: false
