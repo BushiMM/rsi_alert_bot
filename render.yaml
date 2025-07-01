@@ -1,13 +1,13 @@
 services:
-  - type: web
-    name: rsi-bot
-    runtime: python
-    buildCommand: ""
-    startCommand: python3 bot.py
-    envVars:
-      - key: TELEGRAM_TOKEN
-        sync: false
-      - key: TELEGRAM_ID
-        sync: false
-      - key: RENDER_EXTERNAL_URL
-        sync: false
+- type: web
+name: rsi-bot
+runtime: python
+buildCommand: ""
+startCommand: python3 bot.py
+envVars:
+- key: TELEGRAM_TOKEN
+sync: false
+- key: TELEGRAM_ID
+sync: fals
+- key: RENDER_EXTERNAL_UR
+sync: false
