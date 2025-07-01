@@ -1,1 +1,1 @@
-Delate Procfile
+disattivato
